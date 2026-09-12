@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Design Preview - Ringvitation</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Carattere&family=Cardo:ital,wght@0,400;0,700;1,400&family=Poppins:wght@300;400;500;600;700&family=Roboto+Slab:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Colors */
+            --color-primary: #0170b9;
+            --color-dark-1: #3a3a3a;
+            --color-dark-2: #424242;
+            --color-text: #4b4f58;
+            --color-bg-1: #f5f5f5;
+            --color-bg-2: #f2f5f7;
+            --color-white: #ffffff;
+            --color-black: #000000;
+
+            /* Typography */
+            --font-sans: 'Poppins', 'Roboto', sans-serif;
+            --font-serif: 'Cardo', 'Roboto Slab', serif;
+            --font-script: 'Carattere', cursive;
+
+            /* Spacing */
+            --spacing-sm: 8px;
+            --spacing-md: 16px;
+            --spacing-lg: 32px;
+            --spacing-xl: 64px;
+            --spacing-xxl: 100px;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            color: var(--color-text);
+            background-color: var(--color-bg-1);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1140px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-md);
+        }
+
+        section {
+            padding: var(--spacing-xxl) 0;
+        }
+
+        h1, h2, h3, h4 {
+            color: var(--color-dark-1);
+            margin-top: 0;
+        }
+
+        h1 {
+            font-family: var(--font-script);
+            font-size: 5rem;
+            font-weight: 400;
+            text-align: center;
+            margin-bottom: var(--spacing-md);
+            color: var(--color-dark-2);
+        }
+
+        h2 {
+            font-family: var(--font-serif);
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: var(--spacing-lg);
+        }
+
+        p {
+            font-size: 1rem;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--color-primary);
+            color: var(--color-white);
+            font-family: var(--font-sans);
+            font-weight: 600;
+            padding: 12px 24px;
+            border-radius: 30px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: var(--color-dark-1);
+        }
+
+        .card {
+            background-color: var(--color-white);
+            padding: var(--spacing-lg);
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            text-align: center;
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .hero {
+            background-color: var(--color-bg-2);
+            text-align: center;
+            padding: var(--spacing-xxl) var(--spacing-md);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 70vh;
+        }
+
+        .hero-subtitle {
+            font-family: var(--font-sans);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            color: var(--color-primary);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="hero">
+        <div class="container">
+            <div class="hero-subtitle">The Wedding Of</div>
+            <h1>Bowo & Maya</h1>
+            <p>We invite you to celebrate our special day.</p>
+            <a href="#" class="btn">Open Invitation</a>
+        </div>
+    </div>
+
+    <section>
+        <div class="container">
+            <h2>Event Details</h2>
+            <div class="card">
+                <h3 style="font-family: var(--font-serif); color: var(--color-primary); font-size: 1.8rem;">Resepsi</h3>
+                <p><strong>Sunday, 20 August 2026</strong><br>09:00 AM - Finish</p>
+                <p>Gedung Serbaguna<br>Jl. Example Street No. 123, Jakarta</p>
+                <a href="#" class="btn" style="margin-top: 15px;">View Location</a>
+            </div>
+        </div>
+    </section>
+
+</body>
+</html>
