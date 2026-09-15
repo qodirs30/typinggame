@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Qodirs TypeRacer Engine</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" crossorigin href="/typinggame/assets/index-CC7eH3ub.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header & Stats -->
+        <header class="header">
+            <div class="logo">Qodirs TypeRacer</div>
+            <div class="controls">
+                <select id="mode-select">
+                    <optgroup label="Standard">
+                        <option value="id_lower">ID Lower (Basic)</option>
+                        <option value="id_formal">ID Formal</option>
+                        <option value="en_mixed">EN Mixed</option>
+                        <option value="code_ts">TS Code Snippets</option>
+                        <option value="symbols">Pure Symbols</option>
+                    </optgroup>
+                    <optgroup label="Lagu & Puisi (Indo)">
+                        <option value="song_id_1">Lagu: Dan (Sheila On 7)</option>
+                        <option value="song_id_2">Lagu: Separuh Nafas (Dewa 19)</option>
+                        <option value="song_id_3">Lagu: Kangen (Dewa 19)</option>
+                        <option value="song_id_4">Lagu: Akad (Payung Teduh)</option>
+                        <option value="poem_id_1">Puisi: Aku (Chairil Anwar)</option>
+                        <option value="poem_id_2">Puisi: Cintaku Jauh Di Pulau</option>
+                        <option value="poem_id_3">Puisi: Hujan Bulan Juni</option>
+                    </optgroup>
+                    <optgroup label="Songs & Poems (EN)">
+                        <option value="song_en_1">Song: Bohemian Rhapsody</option>
+                        <option value="song_en_2">Song: Yesterday (Beatles)</option>
+                        <option value="song_en_3">Song: Sound of Silence</option>
+                        <option value="song_en_4">Song: Don't Stop Believin'</option>
+                        <option value="poem_en_1">Poem: The Road Not Taken</option>
+                        <option value="poem_en_2">Poem: The Raven</option>
+                        <option value="poem_en_3">Poem: Sonnet 18 (Shakespeare)</option>
+                    </optgroup>
+                    <optgroup label="Tutorial">
+                        <option value="tutorial_home_row">Tutorial: Home Row (ASDF)</option>
+                        <option value="tutorial_top_row">Tutorial: Top Row (QWER)</option>
+                        <option value="tutorial_bottom_row">Tutorial: Bottom Row (ZXCV)</option>
+                        <option value="tutorial_full">Tutorial: Full Keyboard</option>
+                    </optgroup>
+                </select>
+                <select id="rival-select">
+                    <option value="boss">Boss AI (Qodirs)</option>
+                    <option value="ghost">Ghost Runner</option>
+                    <option value="pvp">Local PvP (Broadcast)</option>
+                    <option value="solo_time">Solo Time Attack (1 Min)</option>
+                </select>
+                <button id="start-btn">Start Race</button>
+            </div>
+        </header>
+
+        <div class="stats-bar">
+            <div class="stat"><span class="label">WPM</span><span id="stat-wpm" class="value">0</span></div>
+            <div class="stat"><span class="label">ACCURACY</span><span id="stat-accuracy" class="value">100%</span></div>
+            <div class="stat"><span class="label">COMBO</span><span id="stat-combo" class="value">0x</span></div>
+        </div>
+
+        <!-- Track Visualizer -->
+        <div class="track-container">
+            <!-- P1 Track -->
+            <div class="lane" id="p1-lane">
+                <div class="avatar-container" id="p1-avatar-container">
+                    <div class="avatar p1-avatar">
+                        <svg viewBox="0 0 100 100" width="30" height="30" fill="currentColor">
+                            <circle cx="50" cy="50" r="45" fill="none" stroke="currentColor" stroke-width="5"/>
+                            <circle cx="35" cy="40" r="8" />
+                            <circle cx="65" cy="40" r="8" />
+                            <path d="M 30 70 Q 50 85 70 70" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <span class="player-name">You</span>
+                </div>
+                <div class="finish-line"></div>
+            </div>
+            <!-- Rival Track -->
+            <div class="lane" id="rival-lane">
+                <div class="avatar-container" id="rival-avatar-container">
+                    <div class="avatar rival-avatar">
+                        <svg viewBox="0 0 100 100" width="30" height="30" fill="currentColor">
+                            <circle cx="50" cy="50" r="45" fill="none" stroke="currentColor" stroke-width="5"/>
+                            <rect x="25" y="35" width="20" height="10" fill="currentColor" />
+                            <rect x="55" y="35" width="20" height="10" fill="currentColor" />
+                            <line x1="30" y1="70" x2="70" y2="70" stroke="currentColor" stroke-width="5" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <span class="player-name" id="rival-name">Qodirs</span>
+                </div>
+                <div class="finish-line"></div>
+            </div>
+        </div>
+
+        <!-- Typing Display Zone -->
+        <div class="typing-display" id="typing-display">
+            <!-- Text spans will be injected here -->
+        </div>
+
+        <!-- Virtual Keyboard -->
+        <div class="virtual-keyboard">
+            <div class="kb-row">
+                <div class="key lp" data-key="q">Q</div>
+                <div class="key lr" data-key="w">W</div>
+                <div class="key lm" data-key="e">E</div>
+                <div class="key li" data-key="r">R</div>
+                <div class="key li" data-key="t">T</div>
+                <div class="key ri" data-key="y">Y</div>
+                <div class="key ri" data-key="u">U</div>
+                <div class="key rm" data-key="i">I</div>
+                <div class="key rr" data-key="o">O</div>
+                <div class="key rp" data-key="p">P</div>
+                <div class="key rp" data-key="[">[</div>
+                <div class="key rp" data-key="]">]</div>
+            </div>
+            <div class="kb-row">
+                <div class="key lp" data-key="a">A</div>
+                <div class="key lr" data-key="s">S</div>
+                <div class="key lm" data-key="d">D</div>
+                <div class="key li" data-key="f">F</div>
+                <div class="key li" data-key="g">G</div>
+                <div class="key ri" data-key="h">H</div>
+                <div class="key ri" data-key="j">J</div>
+                <div class="key rm" data-key="k">K</div>
+                <div class="key rr" data-key="l">L</div>
+                <div class="key rp" data-key=";">;</div>
+                <div class="key rp" data-key="'">'</div>
+                <div class="key rp special" data-key="Enter">Enter</div>
+            </div>
+            <div class="kb-row">
+                <div class="key lp special" data-key="Shift">Shift</div>
+                <div class="key lp" data-key="z">Z</div>
+                <div class="key lr" data-key="x">X</div>
+                <div class="key lm" data-key="c">C</div>
+                <div class="key li" data-key="v">V</div>
+                <div class="key li" data-key="b">B</div>
+                <div class="key ri" data-key="n">N</div>
+                <div class="key ri" data-key="m">M</div>
+                <div class="key rm" data-key=",">,</div>
+                <div class="key rr" data-key=".">.</div>
+                <div class="key rp" data-key="/">/</div>
+                <div class="key lp special" data-key="Shift">Shift</div>
+            </div>
+            <div class="kb-row">
+                <div class="key th spacebar" data-key=" ">Space</div>
+            </div>
+        </div>
+        
+        <!-- Hint Hands (Optional Visuals) -->
+        <div class="hands-container">
+            <div class="hand left-hand">
+                <!-- Simple finger dots -->
+                <div class="finger f-lp"></div>
+                <div class="finger f-lr"></div>
+                <div class="finger f-lm"></div>
+                <div class="finger f-li"></div>
+                <div class="finger f-th"></div>
+            </div>
+            <div class="hand right-hand">
+                <div class="finger f-th"></div>
+                <div class="finger f-ri"></div>
+                <div class="finger f-rm"></div>
+                <div class="finger f-rr"></div>
+                <div class="finger f-rp"></div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="content.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
