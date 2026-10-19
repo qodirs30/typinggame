@@ -1,151 +1,1413 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Design Preview - Ringvitation</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Carattere&family=Cardo:ital,wght@0,400;0,700;1,400&family=Poppins:wght@300;400;500;600;700&family=Roboto+Slab:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ringvitation (The Wedding of Bowo &amp; Maya) Preview</title>
+    <meta name="color-scheme" content="light" />
     <style>
-        :root {
-            /* Colors */
-            --color-primary: #0170b9;
-            --color-dark-1: #3a3a3a;
-            --color-dark-2: #424242;
-            --color-text: #4b4f58;
-            --color-bg-1: #f5f5f5;
-            --color-bg-2: #f2f5f7;
-            --color-white: #ffffff;
-            --color-black: #000000;
+      :root {
+        --page-bg: #084259;
+        --page-bg-muted: rgb(10, 39, 51);
+        --surface-bg: #0C0C0C;
+        --surface-bg-muted: rgb(10, 39, 51);
+        --surface-border: #C4A17E;
+        --surface-border-strong: rgb(42, 91, 109);
+        --surface-shadow: 0 0 0 1px rgba(0, 0, 0, 0.08), 0 2px 2px rgba(0, 0, 0, 0.04), 0 8px 8px -8px rgba(0, 0, 0, 0.04);
+        --surface-shadow-soft: 0 0 0 1px #C4A17E;
+        --ink: #F8F4E7;
+        --muted: #C6C6C6;
+        --subtle: rgb(118, 148, 154);
+        --accent: #bc9b64;
+        --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+        --font-display: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+        --font-mono: "Roboto Mono", ui-monospace, "SFMono-Regular", "SF Mono", Menlo, monospace;
+        --body-size: 16px;
+        --body-line: 20px;
+        --body-weight: 400;
+        --label-size: 12px;
+        --label-line: 16px;
+        --label-track: 0.2em;
+        --title-size: 24px;
+        --title-line: 28px;
+        --title-track: 0.05em;
+        --section-size: 20px;
+        --section-line: 24px;
+        --section-track: 0.05em;
+        --source-size: 13px;
+        --source-line: 20px;
+        --space-1: 8px;
+        --space-2: 12px;
+        --space-3: 16px;
+        --space-4: 24px;
+        --space-5: 32px;
+        --space-6: 40px;
+        --radius-panel: 8px;
+        --radius-card: 8px;
+        --radius-micro: 2px;
+        --radius-pill: 999px;
+        --button-height: 40px;
+        --button-font-size: 12px;
+        --button-weight: 500;
+        --button-radius: 999px;
+        --secondary-button-radius: 999px;
+        --layout-gap: 24px;
+        --page-padding: 24px;
+      }
 
-            /* Typography */
-            --font-sans: 'Poppins', 'Roboto', sans-serif;
-            --font-serif: 'Cardo', 'Roboto Slab', serif;
-            --font-script: 'Carattere', cursive;
+      * {
+        box-sizing: border-box;
+      }
 
-            /* Spacing */
-            --spacing-sm: 8px;
-            --spacing-md: 16px;
-            --spacing-lg: 32px;
-            --spacing-xl: 64px;
-            --spacing-xxl: 100px;
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        min-width: 320px;
+        color: var(--ink);
+        font-family: var(--font-body);
+        font-size: var(--body-size);
+        font-weight: var(--body-weight);
+        line-height: var(--body-line);
+        background:
+          radial-gradient(circle at top, color-mix(in srgb, var(--accent) 8%, transparent), transparent 30%),
+          linear-gradient(180deg, var(--page-bg) 0%, var(--page-bg-muted) 100%);
+      }
+
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        z-index: -1;
+        pointer-events: none;
+        background-image:
+          linear-gradient(color-mix(in srgb, var(--surface-border) 56%, transparent) 1px, transparent 1px),
+          linear-gradient(90deg, color-mix(in srgb, var(--surface-border) 56%, transparent) 1px, transparent 1px);
+        background-size: 100% calc(48px), calc(48px) 100%;
+        mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.3), transparent 88%);
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      button {
+        font: inherit;
+      }
+
+      .shell {
+        width: min(1440px, calc(100vw - (var(--page-padding) * 2)));
+        margin: 0 auto;
+        padding: var(--page-padding) 0 calc(var(--page-padding) * 1.2);
+      }
+
+      .layout {
+        display: grid;
+        grid-template-columns: minmax(340px, 0.92fr) minmax(420px, 1fr);
+        gap: var(--layout-gap);
+        align-items: start;
+      }
+
+      .stack {
+        display: grid;
+        gap: var(--space-4);
+      }
+
+      .panel {
+        overflow: hidden;
+        border: 1px solid var(--surface-border);
+        border-radius: var(--radius-panel);
+        background: linear-gradient(180deg, color-mix(in srgb, var(--surface-bg) 88%, white) 0%, var(--surface-bg) 100%);
+        box-shadow: var(--surface-shadow);
+      }
+
+      .panel-inner {
+        padding: var(--space-4);
+      }
+
+      .hero-card {
+        position: relative;
+      }
+
+      .hero-card::before {
+        content: "";
+        position: absolute;
+        left: var(--space-4);
+        right: var(--space-4);
+        top: 0;
+        height: 3px;
+        border-radius: 999px;
+        background: linear-gradient(90deg, #bc9b64 0%, #C4A17E 33%, #084259 67%, #0C0C0C 100%);
+      }
+
+      .eyebrow {
+        margin-bottom: var(--space-2);
+        color: var(--muted);
+        font-size: var(--label-size);
+        line-height: var(--label-line);
+        letter-spacing: var(--label-track);
+        text-transform: uppercase;
+      }
+
+      .site-title,
+      .section-title {
+        margin: 0;
+        color: var(--ink);
+        font-family: var(--font-display);
+        font-weight: 600;
+      }
+
+      .site-title {
+        font-size: var(--title-size);
+        line-height: var(--title-line);
+        letter-spacing: var(--title-track);
+      }
+
+      .descriptor {
+        margin: var(--space-2) 0 0;
+        max-width: 42ch;
+        color: var(--muted);
+        font-size: var(--body-size);
+        line-height: var(--body-line);
+      }
+
+      .summary {
+        margin: var(--space-3) 0 0;
+        max-width: 56ch;
+        color: var(--muted);
+        font-size: var(--body-size);
+        line-height: var(--body-line);
+      }
+
+      .chip-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--space-2);
+        margin: var(--space-3) 0 0;
+      }
+
+      .chip {
+        display: inline-flex;
+        align-items: center;
+        min-height: calc(8px * 3);
+        padding: 0 var(--space-2);
+        border: 1px solid var(--surface-border);
+        border-radius: var(--radius-pill);
+        background: var(--surface-bg);
+        color: var(--ink);
+        font-size: var(--label-size);
+        line-height: var(--label-line);
+        box-shadow: var(--surface-shadow-soft);
+      }
+
+      .observed-link {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--space-2);
+        margin-top: var(--space-4);
+        padding-top: var(--space-3);
+        border-top: 1px solid var(--surface-border);
+        color: var(--muted);
+        font-size: var(--label-size);
+        overflow-wrap: anywhere;
+      }
+
+      .observed-link::before {
+        content: "";
+        width: 8px;
+        height: 8px;
+        border-radius: 999px;
+        background: var(--accent);
+        box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 16%, transparent);
+      }
+
+      .section-title {
+        font-size: var(--section-size);
+        line-height: var(--section-line);
+        letter-spacing: var(--section-track);
+      }
+
+      .section-subtitle {
+        margin: var(--space-2) 0 var(--space-4);
+        color: var(--muted);
+        font-size: var(--body-size);
+        line-height: var(--body-line);
+      }
+
+      .palette-grid,
+      .theme-mode-grid,
+      .type-list,
+      .component-card,
+      .prompt-list,
+      .mini-grid,
+      .token-table {
+        display: grid;
+        gap: var(--space-2);
+      }
+
+      .palette-row {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: var(--space-2);
+      }
+
+      .palette-row.neutral-row {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+
+      .theme-mode-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: var(--space-3);
+      }
+
+      .theme-mode-card {
+        display: grid;
+        gap: var(--space-2);
+        padding: var(--space-3);
+        border: 1px solid var(--surface-border);
+        border-radius: var(--radius-card);
+        background: color-mix(in srgb, var(--surface-bg) 92%, white);
+      }
+
+      .theme-mode-card.is-dark {
+        background: #111111;
+        color: #f4f4f4;
+        border-color: rgba(255, 255, 255, 0.12);
+      }
+
+      .theme-mode-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: var(--space-2);
+      }
+
+      .theme-mode-label {
+        color: var(--subtle);
+        font-size: var(--label-size);
+        line-height: var(--label-line);
+        letter-spacing: var(--label-track);
+        text-transform: uppercase;
+      }
+
+      .theme-mode-card.is-dark .theme-mode-label {
+        color: rgba(255, 255, 255, 0.7);
+      }
+
+      .theme-mode-note {
+        margin: 0;
+        color: var(--muted);
+        font-size: calc(var(--body-size) - 1px);
+        line-height: calc(var(--body-line) - 4px);
+      }
+
+      .theme-mode-card.is-dark .theme-mode-note {
+        color: rgba(255, 255, 255, 0.82);
+      }
+
+      .theme-swatch-row {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: var(--space-2);
+      }
+
+      .theme-swatch {
+        display: grid;
+        gap: 6px;
+      }
+
+      .theme-swatch-box {
+        height: 72px;
+        border-radius: calc(var(--radius-card) - 4px);
+        border: 1px solid color-mix(in srgb, var(--surface-border-strong) 75%, transparent);
+      }
+
+      .theme-mode-card.is-dark .theme-swatch-box {
+        border-color: rgba(255, 255, 255, 0.14);
+      }
+
+      .theme-swatch-name {
+        color: inherit;
+        font-size: 12px;
+        line-height: 1.3;
+      }
+
+      .theme-swatch-value {
+        color: var(--subtle);
+        font-size: 11px;
+        line-height: 1.3;
+      }
+
+      .theme-mode-card.is-dark .theme-swatch-value {
+        color: rgba(255, 255, 255, 0.62);
+      }
+
+      .swatch {
+        display: grid;
+        gap: var(--space-2);
+      }
+
+      .swatch-box {
+        min-height: calc(8px * 12);
+        border-radius: var(--radius-card);
+        border: 1px solid color-mix(in srgb, var(--surface-border-strong) 75%, transparent);
+        box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ink) 4%, transparent);
+      }
+
+      .swatch-label,
+      .token-heading,
+      .prompt-card strong,
+      .card-preview h4 {
+        color: var(--ink);
+        font-family: var(--font-display);
+        font-size: var(--body-size);
+        line-height: var(--body-line);
+        font-weight: 600;
+      }
+
+      .swatch-meta,
+      .type-metrics,
+      .mini-label,
+      .copy-state,
+      .file-tab,
+      .ghost-button,
+      .segmented button {
+        color: var(--muted);
+        font-size: var(--label-size);
+        line-height: var(--label-line);
+      }
+
+      .type-row {
+        display: grid;
+        grid-template-columns: 72px minmax(0, 1fr) auto;
+        gap: var(--space-2);
+        align-items: baseline;
+        padding: var(--space-2) 0;
+        border-top: 1px solid var(--surface-border);
+      }
+
+      .type-row:first-child,
+      .mini-row:first-child,
+      .token-row:first-child {
+        border-top: 0;
+        padding-top: 0;
+      }
+
+      .type-role {
+        color: var(--muted);
+        font-size: var(--label-size);
+        line-height: var(--label-line);
+        letter-spacing: var(--label-track);
+        text-transform: uppercase;
+      }
+
+      .type-sample {
+        color: var(--ink);
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .split-card {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--space-4);
+      }
+
+      .token-row,
+      .mini-row {
+        display: grid;
+        gap: var(--space-2);
+        align-items: start;
+        padding-top: var(--space-2);
+        border-top: 1px solid var(--surface-border);
+      }
+
+      .token-row {
+        grid-template-columns: 1fr auto;
+      }
+
+      .mini-row {
+        grid-template-columns: 88px minmax(0, 1fr);
+      }
+
+      .mini-content,
+      .prompt-card p,
+      .card-preview p {
+        color: var(--muted);
+        font-size: var(--body-size);
+        line-height: var(--body-line);
+      }
+
+      .radius-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: var(--space-2);
+      }
+
+      .radius-card,
+      .prompt-card {
+        padding: var(--space-3);
+        border: 1px solid var(--surface-border);
+        border-radius: var(--radius-card);
+        background: var(--surface-bg-muted);
+        box-shadow: var(--surface-shadow-soft);
+      }
+
+      .radius-demo {
+        aspect-ratio: 1;
+        width: 100%;
+        border: 1px solid var(--surface-border-strong);
+        background: var(--surface-bg);
+      }
+
+      .radius-name {
+        margin-top: var(--space-2);
+        color: var(--ink);
+        font-size: var(--body-size);
+        line-height: var(--body-line);
+        font-weight: 600;
+      }
+
+      .radius-value {
+        margin-top: 4px;
+        color: var(--muted);
+        font-size: var(--label-size);
+      }
+
+      .button-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--space-2);
+      }
+
+      .cta {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: var(--button-height);
+        padding: 0 var(--space-3);
+        border-radius: var(--button-radius);
+        font-family: var(--font-body);
+        font-size: var(--button-font-size);
+        font-weight: var(--button-weight);
+        line-height: 1;
+        letter-spacing: normal;
+      }
+
+      .cta-primary {
+        border: 1px solid transparent;
+        background: #171717;
+        color: #ffffff;
+        border-radius: 999px;
+      }
+
+      .cta-secondary {
+        border: 1px solid #171717;
+        background: #ffffff;
+        color: #171717;
+        border-radius: 999px;
+        box-shadow: var(--surface-shadow-soft);
+      }
+
+      .card-preview {
+        padding: 16px;
+        border-radius: 8px;
+        border: 1px solid color-mix(in srgb, var(--surface-border-strong) 72%, transparent);
+        background: var(--surface-bg);
+        color: var(--ink);
+        box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.08), 0 2px 2px rgba(0, 0, 0, 0.04), 0 8px 8px -8px rgba(0, 0, 0, 0.04);
+      }
+
+      .card-preview h4 {
+        margin: 0 0 var(--space-1);
+      }
+
+      .source-shell {
+        position: sticky;
+        top: var(--page-padding);
+      }
+
+      .source-header {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: var(--space-2);
+        padding: var(--space-3) var(--space-4) var(--space-2);
+        border-bottom: 1px solid var(--surface-border);
+      }
+
+      .file-tabs {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 2px var(--space-3);
+      }
+
+      .file-tab {
+        padding: 0 0 var(--space-2);
+        border-bottom: 2px solid transparent;
+      }
+
+      .file-tab.active {
+        color: var(--ink);
+        border-bottom-color: var(--ink);
+        font-weight: 600;
+      }
+
+      .source-toolbar {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: var(--space-2);
+        padding: var(--space-2) var(--space-4);
+        border-bottom: 1px solid var(--surface-border);
+      }
+
+      .segmented {
+        display: inline-flex;
+        padding: 3px;
+        border: 1px solid var(--surface-border);
+        border-radius: var(--radius-pill);
+        background: var(--surface-bg-muted);
+      }
+
+      .segmented button {
+        border: 0;
+        border-radius: var(--radius-pill);
+        background: transparent;
+        padding: 6px 12px;
+        cursor: pointer;
+      }
+
+      .segmented button.is-active {
+        background: var(--surface-bg);
+        color: var(--ink);
+        box-shadow: var(--surface-shadow-soft);
+      }
+
+      .toolbar-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--space-2);
+        margin-left: auto;
+      }
+
+      .ghost-button {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 8px 12px;
+        border: 1px solid var(--surface-border);
+        border-radius: 2px;
+        background: var(--surface-bg);
+        box-shadow: var(--surface-shadow-soft);
+        cursor: pointer;
+      }
+
+      .source-body {
+        max-height: calc(100vh - (var(--page-padding) * 2) - 120px);
+        overflow: auto;
+      }
+
+      .source-view,
+      .rendered-view {
+        margin: 0;
+        padding: var(--space-4);
+      }
+
+      .source-view {
+        color: var(--ink);
+        font-family: var(--font-mono);
+        font-size: var(--source-size);
+        line-height: var(--source-line);
+        white-space: pre-wrap;
+        word-break: break-word;
+        background: var(--surface-bg);
+      }
+
+      .rendered-view {
+        color: var(--ink);
+        font-family: var(--font-body);
+        font-size: var(--body-size);
+        line-height: var(--body-line);
+        background: var(--surface-bg);
+      }
+
+      .rendered-view[hidden],
+      .source-view[hidden] {
+        display: none;
+      }
+
+      .rendered-view h2,
+      .rendered-view h3 {
+        margin: var(--space-4) 0 var(--space-2);
+        color: var(--ink);
+        font-family: var(--font-display);
+        font-weight: 600;
+      }
+
+      .rendered-view h2 {
+        font-size: var(--section-size);
+        line-height: var(--section-line);
+        letter-spacing: var(--section-track);
+      }
+
+      .rendered-view h2:first-child {
+        margin-top: 0;
+      }
+
+      .rendered-view h3 {
+        color: var(--muted);
+        font-size: calc(24px - 4px);
+        line-height: calc(28px - 4px);
+      }
+
+      .rendered-view p,
+      .rendered-view li {
+        color: var(--muted);
+      }
+
+      .rendered-view ul,
+      .rendered-view ol {
+        margin: 0 0 var(--space-3) 20px;
+        padding: 0;
+      }
+
+      .rendered-view table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: var(--space-2) 0 var(--space-4);
+      }
+
+      .rendered-view th,
+      .rendered-view td {
+        padding: var(--space-2) var(--space-2);
+        border: 1px solid var(--surface-border);
+        text-align: left;
+        vertical-align: top;
+        font-size: var(--label-size);
+        line-height: var(--label-line);
+      }
+
+      .rendered-view th {
+        color: var(--ink);
+        background: var(--surface-bg-muted);
+      }
+
+      .rendered-view code {
+        padding: 0.14em 0.4em;
+        border-radius: 2px;
+        background: var(--surface-bg-muted);
+        color: var(--ink);
+        font-family: var(--font-mono);
+        font-size: 0.92em;
+      }
+
+      @media (max-width: 1120px) {
+        .layout {
+          grid-template-columns: 1fr;
         }
 
-        body {
-            font-family: var(--font-sans);
-            color: var(--color-text);
-            background-color: var(--color-bg-1);
-            margin: 0;
-            padding: 0;
-            line-height: 1.6;
+        .source-shell {
+          position: relative;
+          top: 0;
         }
 
-        .container {
-            max-width: 1140px;
-            margin: 0 auto;
-            padding: 0 var(--spacing-md);
+        .source-body {
+          max-height: none;
+        }
+      }
+
+      @media (max-width: 760px) {
+        .shell {
+          width: min(100vw - (12px * 2), 100%);
+          padding-top: 12px;
         }
 
-        section {
-            padding: var(--spacing-xxl) 0;
+        .panel-inner,
+        .source-view,
+        .rendered-view {
+          padding-left: var(--space-3);
+          padding-right: var(--space-3);
         }
 
-        h1, h2, h3, h4 {
-            color: var(--color-dark-1);
-            margin-top: 0;
+        .palette-row,
+        .palette-row.neutral-row,
+        .theme-mode-grid,
+        .theme-swatch-row,
+        .split-card,
+        .radius-grid {
+          grid-template-columns: 1fr;
         }
 
-        h1 {
-            font-family: var(--font-script);
-            font-size: 5rem;
-            font-weight: 400;
-            text-align: center;
-            margin-bottom: var(--spacing-md);
-            color: var(--color-dark-2);
+        .type-row,
+        .mini-row {
+          grid-template-columns: 1fr;
         }
-
-        h2 {
-            font-family: var(--font-serif);
-            font-size: 2.5rem;
-            text-align: center;
-            margin-bottom: var(--spacing-lg);
-        }
-
-        p {
-            font-size: 1rem;
-            margin-bottom: var(--spacing-md);
-        }
-
-        .btn {
-            display: inline-block;
-            background-color: var(--color-primary);
-            color: var(--color-white);
-            font-family: var(--font-sans);
-            font-weight: 600;
-            padding: 12px 24px;
-            border-radius: 30px;
-            text-decoration: none;
-            transition: background-color 0.3s ease;
-            border: none;
-            cursor: pointer;
-        }
-
-        .btn:hover {
-            background-color: var(--color-dark-1);
-        }
-
-        .card {
-            background-color: var(--color-white);
-            padding: var(--spacing-lg);
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-            text-align: center;
-            margin-bottom: var(--spacing-lg);
-        }
-
-        .hero {
-            background-color: var(--color-bg-2);
-            text-align: center;
-            padding: var(--spacing-xxl) var(--spacing-md);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 70vh;
-        }
-
-        .hero-subtitle {
-            font-family: var(--font-sans);
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            font-size: 0.9rem;
-            color: var(--color-primary);
-        }
+      }
     </style>
-</head>
-<body>
-
-    <div class="hero">
-        <div class="container">
-            <div class="hero-subtitle">The Wedding Of</div>
-            <h1>Bowo & Maya</h1>
-            <p>We invite you to celebrate our special day.</p>
-            <a href="#" class="btn">Open Invitation</a>
-        </div>
-    </div>
-
-    <section>
-        <div class="container">
-            <h2>Event Details</h2>
-            <div class="card">
-                <h3 style="font-family: var(--font-serif); color: var(--color-primary); font-size: 1.8rem;">Resepsi</h3>
-                <p><strong>Sunday, 20 August 2026</strong><br>09:00 AM - Finish</p>
-                <p>Gedung Serbaguna<br>Jl. Example Street No. 123, Jakarta</p>
-                <a href="#" class="btn" style="margin-top: 15px;">View Location</a>
+  </head>
+  <body>
+    <main class="shell">
+      <div class="layout">
+        <section class="stack">
+          <article class="panel hero-card">
+            <div class="panel-inner">
+              <div class="eyebrow">Design Preview</div>
+              <h1 class="site-title">Ringvitation (The Wedding of Bowo &amp; Maya)</h1>
+              <p class="descriptor">An opulent, deeply atmospheric dark-romance digital wedding invitation tailored for intimate...</p>
+              <div class="chip-row"><span class="chip">Midnight Petrol &amp; Gold Gradient:...</span><span class="chip">Cathedral Arched Cards: Distinct...</span><span class="chip">Dual Script &amp; Serif Typography:...</span><span class="chip">Layered Entrance Choreography: P...</span></div>
+              <p class="summary">The composition marries modern architectural containers with sacred, classical romance. Slow ethereal rotations of celestial floral mandalas float in negative space, while delicate arched cathedral silhouettes (border-radius: 220px 220px 0 0) frame the matrimonial events. Typography balances ceremonial calligraphic flourishes (Carattere) with dignified literary serif typography (Cardo) and ultra-clean modern geometric utility labels (Poppins). The atmosphere conveys solemn sanctity, royal warmth, and bespoke celebratory grandeur.</p>
+              <a class="observed-link" href="https://inv.ringvitation.my.id/bowo-maya/?untuk=Lubabah" target="_blank" rel="noreferrer">https://inv.ringvitation.my.id/bowo-maya/?untuk=Lubabah</a>
             </div>
-        </div>
-    </section>
+          </article>
 
-</body>
+          <article class="panel">
+            <div class="panel-inner">
+              <h2 class="section-title">Palette</h2>
+              <p class="section-subtitle">Roles and neutrals rendered using the extracted design system rather than a separate display theme.</p>
+              <div class="palette-grid"><div class="palette-row"><div class="swatch">
+    <div class="swatch-box" style="background:#bc9b64;"></div>
+    <div class="swatch-label">Royal Gold Gradient</div>
+    <div class="swatch-meta">
+      <span>linear-gradient(90deg, #bc9b64 0%, #86672B 100%)</span>
+      <span>Primary action</span>
+    </div>
+  </div><div class="swatch">
+    <div class="swatch-box" style="background:#bc9b64;"></div>
+    <div class="swatch-label">Champagne Gold</div>
+    <div class="swatch-meta">
+      <span>#bc9b64</span>
+      <span>Accent</span>
+    </div>
+  </div><div class="swatch">
+    <div class="swatch-box" style="background:#C4A17E;"></div>
+    <div class="swatch-label">Warm Sand Gold</div>
+    <div class="swatch-meta">
+      <span>#C4A17E</span>
+      <span>Secondary Accent</span>
+    </div>
+  </div></div><div class="palette-row neutral-row"><div class="swatch">
+    <div class="swatch-box" style="background:#084259;"></div>
+    <div class="swatch-label">Midnight Petrol</div>
+    <div class="swatch-meta">
+      <span>#084259</span>
+      <span>Deep Atmosphere</span>
+    </div>
+  </div><div class="swatch">
+    <div class="swatch-box" style="background:#0C0C0C;"></div>
+    <div class="swatch-label">Noir Black</div>
+    <div class="swatch-meta">
+      <span>#0C0C0C</span>
+      <span>Surface</span>
+    </div>
+  </div><div class="swatch">
+    <div class="swatch-box" style="background:rgba(0, 0, 0, 0.83);"></div>
+    <div class="swatch-label">Translucent Jet</div>
+    <div class="swatch-meta">
+      <span>rgba(0, 0, 0, 0.83)</span>
+      <span>Surface Deep</span>
+    </div>
+  </div><div class="swatch">
+    <div class="swatch-box" style="background:#F8F4E7;"></div>
+    <div class="swatch-label">Cream Silk</div>
+    <div class="swatch-meta">
+      <span>#F8F4E7</span>
+      <span>Text Primary</span>
+    </div>
+  </div></div></div>
+            </div>
+          </article>
+
+          <article class="panel">
+            <div class="panel-inner">
+              <h2 class="section-title">Theme Modes</h2>
+              <p class="section-subtitle">If the product supports light and dark themes, both modes should stay visible in the exported design system and preview.</p>
+              <div class="prompt-card"><strong>Single mode detected</strong><p>No explicit <code>Theme Modes</code> section was detected in the markdown. If the product supports both light and dark themes, document both so the preview can render them side by side.</p></div>
+            </div>
+          </article>
+
+          <article class="panel">
+            <div class="panel-inner">
+              <h2 class="section-title">Typography</h2>
+              <p class="section-subtitle">The preview shell itself now uses the extracted typography stack, sizes, line heights, and tracking.</p>
+              <div class="type-list"><div class="type-row">
+        <div class="type-role">Hero Couple Names</div>
+        <div
+          class="type-sample"
+          style="font-size:12px; line-height:12px; font-weight:500; letter-spacing:0.02em; font-family:-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Arial, sans-serif;"
+        >
+          The quick brown fox jumps
+        </div>
+        <div class="type-metrics">4.0em - 5.0rem • 500 • 1.1</div>
+      </div><div class="type-row">
+        <div class="type-role">Couple Connector (&quot;&amp;&quot;)</div>
+        <div
+          class="type-sample"
+          style="font-size:12px; line-height:12px; font-weight:400; letter-spacing:normal; font-family:-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Arial, sans-serif;"
+        >
+          The quick brown fox jumps
+        </div>
+        <div class="type-metrics">5.0rem • 400 • 1.0</div>
+      </div><div class="type-row">
+        <div class="type-role">Section Headline</div>
+        <div
+          class="type-sample"
+          style="font-size:12px; line-height:12px; font-weight:400; letter-spacing:0.05em; font-family:-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Arial, sans-serif;"
+        >
+          The quick brown fox jumps
+        </div>
+        <div class="type-metrics">2.5rem - 3.0rem • 400 • 1.2</div>
+      </div><div class="type-row">
+        <div class="type-role">Date Mega Number</div>
+        <div
+          class="type-sample"
+          style="font-size:48px; line-height:48px; font-weight:600; letter-spacing:normal; font-family:-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Arial, sans-serif;"
+        >
+          The quick brown fox jumps
+        </div>
+        <div class="type-metrics">55px • 600 • 1.0</div>
+      </div><div class="type-row">
+        <div class="type-role">Section Eyebrow</div>
+        <div
+          class="type-sample"
+          style="font-size:12px; line-height:12px; font-weight:400; letter-spacing:0.2em; font-family:-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Arial, sans-serif;"
+        >
+          The quick brown fox jumps
+        </div>
+        <div class="type-metrics">0.8rem - 1.0rem • 400 • 1.4</div>
+      </div><div class="type-row">
+        <div class="type-role">Body / Verses</div>
+        <div
+          class="type-sample"
+          style="font-size:16px; line-height:16px; font-weight:400; letter-spacing:normal; font-family:-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Arial, sans-serif;"
+        >
+          The quick brown fox jumps
+        </div>
+        <div class="type-metrics">16px • 400 • 1.7</div>
+      </div><div class="type-row">
+        <div class="type-role">Metadata / Lineage</div>
+        <div
+          class="type-sample"
+          style="font-size:14px; line-height:14px; font-weight:400; letter-spacing:normal; font-family:-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Arial, sans-serif;"
+        >
+          The quick brown fox jumps
+        </div>
+        <div class="type-metrics">14px • 400 • 1.6</div>
+      </div><div class="type-row">
+        <div class="type-role">Countdown Numbers</div>
+        <div
+          class="type-sample"
+          style="font-size:12px; line-height:12px; font-weight:400; letter-spacing:normal; font-family:-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Arial, sans-serif;"
+        >
+          The quick brown fox jumps
+        </div>
+        <div class="type-metrics">2.0rem • 400 • 1.0</div>
+      </div></div>
+            </div>
+          </article>
+
+          <article class="panel">
+            <div class="panel-inner">
+              <h2 class="section-title">Spacing &amp; Shape</h2>
+              <p class="section-subtitle">Spacing, panel padding, and radius tokens are mapped directly from the layout rules in the markdown.</p>
+              <div class="split-card">
+    <div>
+      <h3 class="token-heading">Spacing</h3>
+      <div class="token-table"><div class="token-row">
+        <span>Base unit</span>
+        <span>8px</span>
+      </div><div class="token-row">
+        <span>Step 2</span>
+        <span>12px</span>
+      </div><div class="token-row">
+        <span>Step 3</span>
+        <span>16px</span>
+      </div><div class="token-row">
+        <span>Step 4</span>
+        <span>24px</span>
+      </div><div class="token-row">
+        <span>Step 5</span>
+        <span>32px</span>
+      </div></div>
+    </div>
+    <div>
+      <h3 class="token-heading">Border Radius</h3>
+      <div class="radius-grid"><div class="radius-card">
+        <div class="radius-demo" style="border-radius:2px;"></div>
+        <div class="radius-name">Micro utility</div>
+        <div class="radius-value">2px</div>
+      </div><div class="radius-card">
+        <div class="radius-demo" style="border-radius:8px;"></div>
+        <div class="radius-name">Standard module</div>
+        <div class="radius-value">8px</div>
+      </div><div class="radius-card">
+        <div class="radius-demo" style="border-radius:999px;"></div>
+        <div class="radius-name">Category rail</div>
+        <div class="radius-value">999px</div>
+      </div><div class="radius-card">
+        <div class="radius-demo" style="border-radius:999px;"></div>
+        <div class="radius-name">CTA pill</div>
+        <div class="radius-value">999px</div>
+      </div></div>
+    </div>
+  </div>
+            </div>
+          </article>
+
+          <article class="panel">
+            <div class="panel-inner">
+              <h2 class="section-title">Components</h2>
+              <p class="section-subtitle">Buttons and cards use the documented height, weight, radius, colors, and surface treatment.</p>
+              <div class="component-card">
+    <div class="button-row">
+      <span class="cta cta-primary">Start Deploying</span>
+      <span class="cta cta-secondary">Get a Demo</span>
+    </div>
+    <div class="card-preview">
+      <h4>System Card Preview</h4>
+      <p>White framed module with restrained shadow and precise spacing.</p>
+    </div>
+  </div>
+            </div>
+          </article>
+
+          <article class="panel">
+            <div class="panel-inner">
+              <h2 class="section-title">System Notes</h2>
+              <p class="section-subtitle">Responsive behavior and depth rules stay visible while keeping the overall proportions calm and readable.</p>
+              <div class="split-card">
+    <div>
+      <h3 class="token-heading">Breakpoints</h3>
+      <div class="mini-grid"><div class="mini-row">
+            <div class="mini-label">Mobile (Primary)</div>
+            <div class="mini-content"><strong>&lt; 768px</strong><br />Full width padding (15px - 20px), couple names stack comfortably at 3.5rem - 4.0rem</div>
+          </div><div class="mini-row">
+            <div class="mini-label">Tablet</div>
+            <div class="mini-content"><strong>768px - 1024px</strong><br />Content bounded in 540px centered column; ornaments scale down</div>
+          </div><div class="mini-row">
+            <div class="mini-label">Desktop</div>
+            <div class="mini-content"><strong>&gt; 1024px</strong><br />Frame invitation as a centered smartphone mockup stage (max-width: 480px) with blurred atmospheric background</div>
+          </div></div>
+    </div>
+    <div>
+      <h3 class="token-heading">Elevation</h3>
+      <div class="mini-grid"><div class="mini-row">
+            <div class="mini-label">Flat</div>
+            <div class="mini-content"><strong>background: transparent; border: none;</strong><br />Headline titles, floating couple names</div>
+          </div><div class="mini-row">
+            <div class="mini-label">Soft Glow</div>
+            <div class="mini-content"><strong>radial-gradient(circle at center, #084259 40%, transparent 80%)</strong><br />Atmospheric backdrop glow</div>
+          </div><div class="mini-row">
+            <div class="mini-label">Raised Card</div>
+            <div class="mini-content"><strong>background: #000000D4; box-shadow: 0px 0px 21px rgba(0,0,0,0.3); border: 2px solid #d8c192;</strong><br />Couple biographical cards</div>
+          </div><div class="mini-row">
+            <div class="mini-label">Arch Elevated</div>
+            <div class="mini-content"><strong>box-shadow: 0px 0px 13px rgba(0,0,0,0.24); border: 2px solid #C4A17E;</strong><br />Ceremony &amp; Reception arch cards</div>
+          </div></div>
+    </div>
+  </div>
+            </div>
+          </article>
+
+          <article class="panel">
+            <div class="panel-inner">
+              <h2 class="section-title">Prompt Guide</h2>
+              <p class="section-subtitle">Prompt snippets are shown in the same typography and spacing language as the extracted design system.</p>
+              <div class="prompt-list"><div class="prompt-card"><strong>Quick Summary</strong><p>A midnight petrol and gilded champagne digital wedding invitation system. It combines cathedral arch containers, slow-rotating mandalas, dual-tone gold script typography (Carattere), formal Roman serifs (Cardo), and modern geometric details (Poppins) over a luminous radial dark teal background.</p></div><div class="prompt-card">
+            <strong>Hero</strong>
+            <p>&quot;Create a full-height centered invitation cover with a radial background from #084259 to #000000. Include an uppercase eyebrow &#39;The Wedding Of&#39;, large dual-tone gold cursive names &#39;Bowo &amp; Maya&#39; in Carattere, a recipient badge for &#39;Lubabah&#39;, and a pill-shaped gold button &#39;Buka Undangan&#39;.&quot;</p>
+          </div><div class="prompt-card">
+            <strong>Card</strong>
+            <p>&quot;Build an event schedule card with an arched top border-radius: 220px 220px 0 0, framed in a 2px #C4A17E gold border. Include an italic serif heading &#39;Akad&#39;, a laurel divider, a 3-part calendar badge with &#39;20&#39; in 55px serif on gold background, and an address in soft silver.&quot;</p>
+          </div><div class="prompt-card">
+            <strong>Navigation</strong>
+            <p>&quot;Render a discreet floating circular music toggle button in the bottom right corner with a gold ring border and a rotating disc icon.&quot;</p>
+          </div><div class="prompt-card"><strong>Ready-to-Use Prompt</strong><p>&quot;Build a luxury dark wedding invitation page inspired by Ringvitation using a midnight navy radial backdrop (#084259 to #000000). Use Google Fonts &#39;Carattere&#39; for romantic script names in warm champagne gold (#bc9b64), &#39;Cardo&#39; for ceremonial section titles, and &#39;Poppins&#39; for clean cream text (#F8F4E7). Feature an arched cathedral card with 220px 220px 0 0 border radius for the wedding events, complete with a countdown timer, gold badge calendar date, and subtle floral rotations.&quot;</p></div></div>
+              <div class="split-card" style="margin-top:var(--space-4);">
+    <div>
+      <h3 class="token-heading">Do</h3>
+      <div class="mini-grid"><div class="mini-row"><div class="mini-label">Do</div><div class="mini-content">Do use the dual gold tones (#bc9b64 and #C4A17E) exclusively for names, main buttons, and arched structural outlines.</div></div><div class="mini-row"><div class="mini-label">Do</div><div class="mini-content">Do keep body text strictly legible in soft cream #F8F4E7 or silver #C6C6C6 against the deep midnight background.</div></div><div class="mini-row"><div class="mini-label">Do</div><div class="mini-content">Do preserve the architectural 220px 220px 0 0 top radius for event cards; it is the visual signature of the design.</div></div><div class="mini-row"><div class="mini-label">Do</div><div class="mini-content">Do maintain centered alignment across all ceremonial typography.</div></div></div>
+    </div>
+    <div>
+      <h3 class="token-heading">Don't</h3>
+      <div class="mini-grid"><div class="mini-row"><div class="mini-label">Don't</div><div class="mini-content">Don&#39;t use bright neon blues, stark primary greens, or flat pastel pinks.</div></div><div class="mini-row"><div class="mini-label">Don't</div><div class="mini-content">Don&#39;t use heavy drop-shadows with sharp black offsets; keep shadows diffuse, radial, and velvety.</div></div><div class="mini-row"><div class="mini-label">Don't</div><div class="mini-content">Don&#39;t use playful rounded fonts (like Comic Sans, Bubblegum, or Inter); maintain the solemn trio of Carattere, Cardo, and Poppins.</div></div><div class="mini-row"><div class="mini-label">Don't</div><div class="mini-content">Don&#39;t stretch content wider than 640px on desktop; keep it in an elegant portrait card frame.</div></div></div>
+    </div>
+  </div>
+            </div>
+          </article>
+        </section>
+
+        <section class="source-shell">
+          <article class="panel">
+            <div class="source-header">
+              <div class="file-tabs">
+                <span class="file-tab">design-system.md</span>
+                <span class="file-tab active">design.md</span>
+                <span class="file-tab">Design JSON</span>
+                <span class="file-tab">CSS Variables</span>
+                <span class="file-tab">Design Tokens</span>
+              </div>
+            </div>
+            <div class="source-toolbar">
+              <div class="segmented" role="tablist" aria-label="View Switcher">
+                <button class="is-active" data-view="source" type="button">Source</button>
+                <button data-view="preview" type="button">Preview</button>
+              </div>
+              <div class="toolbar-actions">
+                <button class="ghost-button" id="copyButton" type="button">Copy</button>
+                <a class="ghost-button" href="design.md" download>Open .md</a>
+                <span class="copy-state" id="copyState"></span>
+              </div>
+            </div>
+            <div class="source-body">
+              <pre class="source-view" id="sourceView"># Design System: Ringvitation (The Wedding of Bowo &amp; Maya)
+
+## 1. Visual Theme &amp; Atmosphere
+
+An opulent, deeply atmospheric dark-romance digital wedding invitation tailored for intimate luxury and timeless solemnity. The aesthetic departs sharply from conventional airy pastels, adopting a moody nocturnal canvas dominated by deep petrol navy (`#084259`), abyssal graphite (`#000000`, `#0C0C0C`), and opulent warm champagne golds (`#bc9b64`, `#C4A17E`). 
+
+The composition marries modern architectural containers with sacred, classical romance. Slow ethereal rotations of celestial floral mandalas float in negative space, while delicate arched cathedral silhouettes (`border-radius: 220px 220px 0 0`) frame the matrimonial events. Typography balances ceremonial calligraphic flourishes (`Carattere`) with dignified literary serif typography (`Cardo`) and ultra-clean modern geometric utility labels (`Poppins`). The atmosphere conveys solemn sanctity, royal warmth, and bespoke celebratory grandeur.
+
+- Overall feeling: Moody midnight romance, imperial elegance, liturgical serenity, and bespoke digital luxury.
+- Visual density: Measured and expansive; dramatic vertical breathing room accented by intimate nested cards.
+- Brand posture: Bespoke celebratory craftsmanship, culturally reverent, and sophisticated.
+- Signature motifs: Cathedral-arch containers, slowly rotating 360-degree floral mandalas, dual-tone gold script headings, and textured tribal tree dividers.
+
+### Key Characteristics
+
+- Midnight Petrol &amp; Gold Gradient: Atmospheric backdrop blending intense dark oceanic teal with deep noir.
+- Cathedral Arched Cards: Distinctive top-rounded arched event cards (`220px 220px 0 0`) with dual-pixel champagne borders.
+- Dual Script &amp; Serif Typography: Expressive `Carattere` cursive script for couple names, anchored by `Cardo` for solemn dates and titles.
+- Layered Entrance Choreography: Progressive reveal sequences using slow fade-ins, zoom-ins, and floating background florals.
+
+## 2. Color Palette &amp; Roles
+
+| Role | Semantic Name | Value | Usage |
+| --- | --- | --- | --- |
+| Primary action | Royal Gold Gradient | `linear-gradient(90deg, #bc9b64 0%, #86672B 100%)` | Main CTA button (&quot;Buka Undangan&quot;), interactive buttons |
+| Accent | Champagne Gold | `#bc9b64` | Bride/Groom calligraphic names, calendar highlighted badges |
+| Secondary Accent | Warm Sand Gold | `#C4A17E` | Arched container borders, date highlight chips, decorative accents |
+| Deep Atmosphere | Midnight Petrol | `#084259` | Central gradient glow, modal atmospheric radial centers |
+| Surface | Noir Black | `#0C0C0C` | Nested container backgrounds, modal dialog surface |
+| Surface Deep | Translucent Jet | `rgba(0, 0, 0, 0.83)` | Couple profile card backdrop with warm gold border |
+| Text Primary | Cream Silk | `#F8F4E7` | Primary headings, subheadings, ceremony names, countdown numbers |
+| Text Secondary | Pale Silver | `#C6C6C6` | Parent names, venue addresses, descriptive body copy |
+| Text Muted | Ash Gray | `#8D8C8C` | Section eyebrows, divider text, decorative line labels |
+| Border | Fine Champagne | `#d8c192` | Subtle profile container boundaries and decorative outlines |
+
+### Primary
+
+- Royal Gold (`#bc9b64`): Expresses celebration and warmth, used on the groom&#39;s name and primary invitation trigger.
+- Warm Sand Gold (`#C4A17E`): Complements the primary gold on the bride&#39;s name, arch frames, and calendar blocks.
+
+### Interactive
+
+- Primary Button: Linear gradient `#bc9b64` to `#86672B` with soft drop shadow `1px 1px 6px rgba(0, 0, 0, 0.26)` and white text.
+- Secondary Button: Pale cream `#F8F4E7` fill with slate border `#656565` and sharp rectangular corners.
+- Icon Triggers: Enclosed envelope and navigation icons colored in warm cream `#F8F4E7`.
+
+### Neutral Scale
+
+- Cream Silk (`#F8F4E7`): Highest contrast text and numerical display.
+- Pure White (`#FFFFFF`): Button text, holy scripture verses, and secondary event subheaders.
+- Pale Silver (`#C6C6C6`): Secondary metadata, parental lineage, and event addresses.
+- Ash Gray (`#8D8C8C`): Subtle divider separators and formal uppercase headers.
+- Midnight Noir (`#000000` / `#0C0C0C`): Deepest background absorption layer.
+
+### Surface &amp; Overlay
+
+- Background Base: Radial gradient `radial-gradient(circle at center, #084259 0%, #0C0C0C 100%)`.
+- Card Surface: Semi-opaque black `#000000D4` (`rgba(0, 0, 0, 0.83)`) providing clear readability over background animations.
+- Modal Cover Overlay: Full-screen locked takeover overlay in dark petrol gradient with radial bloom.
+
+### Theme Modes
+
+#### Dark Mode (Native &amp; Primary)
+
+- Background: Radial gradient `#084259` to `#000000` / `#151414`.
+- Surface: `#0C1F28` / `#000000D4` with `#d8c192` border.
+- Text: `#F8F4E7` (Cream) and `#C6C6C6` (Silver).
+- Accent: `#bc9b64` &amp; `#C4A17E` (Gold dual-tone).
+- Notes: This design system is natively designed for an immersive dark luxury experience.
+
+#### Light Mode (Secondary / Card Contrast Variant)
+
+- Background: Pale cream `#f5f5f5` to `#f2f5f7`.
+- Surface: `#ffffff` with subtle gray shadow `0 10px 30px rgba(0,0,0,0.05)`.
+- Text: `#3a3a3a` / `#4b4f58`.
+- Accent: `#0170b9` (Astra default fallback) or `#bc9b64` (Theme accent).
+- Notes: Used when embedded in neutral article or blog wrappers.
+
+### Shadows &amp; Depth
+
+- Elevation Card: `box-shadow: 0px 0px 21px 0px rgba(0, 0, 0, 0.3)` on couple profile cards.
+- Cathedral Arch Glow: `box-shadow: 0px 0px 13px 0px rgba(0, 0, 0, 0.24)`.
+- Section Separation: Heavy drop shadow `0px 0px 28px 0px rgba(0, 0, 0, 0.51)` on full-width transition blocks.
+- Text Shadow: Subtle depth `1px 1px 1px rgba(0, 0, 0, 0.3)` on display cursive script.
+
+## 3. Typography Rules
+
+### Font Family
+
+- Primary Script: `&quot;Carattere&quot;, cursive` (Google Fonts) – ceremonial calligraphy for names &amp; &quot;&amp;&quot; connector.
+- Editorial Serif: `&quot;Cardo&quot;, serif` (Google Fonts) – formal event titles, dates, and liturgical markers.
+- Modern Sans: `&quot;Poppins&quot;, sans-serif` (Google Fonts) – clean geometric utility, labels, and verses.
+- Secondary Sans: `&quot;Roboto&quot;, sans-serif` – system fallbacks and input elements.
+- Monospace: `&quot;Roboto Mono&quot;, monospace` – technical fallbacks.
+
+### Hierarchy
+
+| Role | Font | Size | Weight | Line Height | Letter Spacing | Notes |
+| --- | --- | --- | --- | --- | --- | --- |
+| Hero Couple Names | Carattere | 4.0em - 5.0rem | 500 | 1.1 | 0.02em | Gold `#bc9b64` &amp; `#C4A17E` with text shadow |
+| Couple Connector (&quot;&amp;&quot;) | Carattere | 5.0rem | 400 | 1.0 | normal | Pale gray `#A8A8A8` or `#DADADA` |
+| Section Headline | Cardo | 2.5rem - 3.0rem | 400 | 1.2 | 0.05em | Italic styling for &quot;Akad&quot;, &quot;Resepsi&quot;, and &quot;Event&quot; |
+| Date Mega Number | Cardo | 55px | 600 | 1.0 | normal | Displayed on gold badge box `#C4A17E` |
+| Section Eyebrow | Poppins | 0.8rem - 1.0rem | 400 | 1.4 | 0.2em | Uppercase, cream `#F8F4E7` (&quot;SAVE THE DATE&quot;, &quot;THE WEDDING OF&quot;) |
+| Body / Verses | Poppins | 16px | 400 | 1.7 | normal | Italicized scripture quotes, white `#FFFFFF` |
+| Metadata / Lineage | Poppins | 14px | 400 | 1.6 | normal | Parental details and locations in silver `#C6C6C6` |
+| Countdown Numbers | Poppins | 2.0rem | 400 | 1.0 | normal | Framed in hollow bordered countdown units |
+
+### Principles
+
+- Dignified Contrast: Pair emotive hand-lettered script (`Carattere`) with strict, symmetrical Roman serif capitals (`Cardo`).
+- Breathing Room: Large display sizes offset by generous margin blocks preventing visual crowding.
+- Golden Ratio Accentuation: Primary human names receive warm reflective metallic tones; procedural titles remain neutral cream.
+
+## 4. Component Stylings
+
+### Buttons and Links
+
+- Primary CTA (&quot;Buka Undangan&quot;):
+  - Height: `44px` - `48px`, padding `10px 28px`.
+  - Background: Gradient `linear-gradient(90deg, #bc9b64 0%, #86672B 100%)`.
+  - Border: None; border-radius: `30px` (pill).
+  - Text: White `#FFFFFF`, `Poppins` 14px, medium weight (`500`).
+  - Leading Icon: FontAwesome envelope icon (`far fa-envelope`).
+- Secondary Action (&quot;Lokasi Acara&quot;, &quot;Kirim Ucapan&quot;):
+  - Height: `38px`, padding `8px 20px`.
+  - Background: Cream `#F8F4E7`, border `1px solid #656565`.
+  - Border Radius: Sharp `0px` or subtle micro `4px`.
+  - Text: Dark slate `#656565`, font weight `600`.
+
+### Cards and Containers
+
+- Cathedral Arched Container (Ceremony &amp; Reception Cards):
+  - Border Radius: `220px 220px 0px 0px` (architectural arched top).
+  - Border: `2px solid #C4A17E`.
+  - Background: Radial gradient `#084259 0%` to `#030303 100%`.
+  - Padding: `70px 20px 50px 20px`.
+  - Elevation: Soft shadow `0px 0px 13px 0px rgba(0, 0, 0, 0.24)`.
+- Profile Couple Container:
+  - Border: `2px solid #d8c192`.
+  - Border Radius: `2px` (nearly rectangular sharp frame).
+  - Background: `rgba(0, 0, 0, 0.83)`.
+  - Padding: `40px 20px`.
+- Holy Verse Block:
+  - Border: None.
+  - Background: Radial gradient `#084259 41%` to `#000000 140%`.
+  - Shadow: Floating depth `0px 0px 28px 0px rgba(0, 0, 0, 0.51)`.
+
+### Inputs and Interactive Controls
+
+- Guest Name Gatekeeper:
+  - Input auto-fill via query parameter (`?untuk=NamaTamu`).
+  - Dynamic display inside guest badge: `&quot;Kepada Yth. Bapak/Ibu/Saudara/i [Nama]&quot;`.
+- Countdown Widget:
+  - 4 inline modules (Days, Hours, Minutes, Seconds).
+  - Border: `1px solid #F8F4E7`.
+  - Background: Transparent with rounded borders.
+  - Number: 2rem `Poppins`, Label: 0.7rem uppercase `Poppins`.
+
+### Navigation
+
+- Floating Action Widget:
+  - Floating circular audio toggle button at the bottom/side corner.
+  - Auto-plays romantic instrumental soundtrack upon tapping &quot;Buka Undangan&quot;.
+  - Iconography: Music disk animation or volume wave icon.
+
+### Image Treatment
+
+- Rotating Mandala Ornament:
+  - PNG floral ring (`hjjhu78hjh-1-1.png`) positioned absolutely at corners and edges.
+  - CSS Animation: Continuous rotation `rotate-360 animated-slow` (360 degrees infinitely).
+- Couple Portraits:
+  - Dimensions: Approx `320px` width.
+  - Asymmetric Box Shadow: Groom portrait uses `20px 20px 0px 0px rgba(212, 212, 212, 0.19)`; Bride portrait uses `-20px 20px 0px 0px rgba(212, 212, 212, 0.19)`.
+  - Border Radius: `0px` (crisp editorial photograph crops).
+
+### Distinctive Components
+
+- Tribal Tree / Decorative Divider:
+  - Centered SVG patterned flourish with embedded organic curves or laurel leaf dividers (`--divider-pattern-url`).
+  - Color: Cream `#FFFFFF` or Ash `#8D8C8C`, width `50%`.
+- Calendar Badge Block:
+  - Triple stack container: Month (top bordered), Day (solid gold filled square with large 55px number), Year (bottom bordered).
+
+## 5. Layout Principles
+
+### Spacing System
+
+- Base unit: `8px`.
+- Repeated spacing values: `8px`, `16px`, `24px`, `32px`, `48px`, `70px`.
+
+### Grid &amp; Container
+
+- Grid logic: Single-column centered stream optimized for vertical mobile scrolling.
+- Max content width: `100%` on mobile, constrained to `480px` - `600px` on desktop viewport to preserve intimate phone-invitation ratio.
+- Section spacing: `40px` to `70px` vertical padding between matrimonial chapters.
+
+### Whitespace Philosophy
+
+- Concentric Density: High breathing room around royal headings; compact, deliberate density inside the cathedral event arch.
+- Center-aligned balance: Strict central axis alignment across all textual and ornamental elements.
+
+### Border Radius Scale
+
+- Micro: `2px` (profile photo boxes, formal borders).
+- Standard: `8px` - `12px` (inputs and secondary containers).
+- Arched: `220px 220px 0px 0px` (signature ceremony arch cards).
+- Pill: `999px` (opening CTA button).
+
+## 6. Depth &amp; Elevation
+
+| Level | Treatment | Use |
+| --- | --- | --- |
+| Flat | `background: transparent; border: none;` | Headline titles, floating couple names |
+| Soft Glow | `radial-gradient(circle at center, #084259 40%, transparent 80%)` | Atmospheric backdrop glow |
+| Raised Card | `background: #000000D4; box-shadow: 0px 0px 21px rgba(0,0,0,0.3); border: 2px solid #d8c192;` | Couple biographical cards |
+| Arch Elevated | `box-shadow: 0px 0px 13px rgba(0,0,0,0.24); border: 2px solid #C4A17E;` | Ceremony &amp; Reception arch cards |
+| Overlay Gate | `position: fixed; inset: 0; z-index: 9999; backdrop-filter: blur(8px);` | Opening gate modal before invitation unlock |
+
+### Depth Principles
+
+- Light-Emitting Backgrounds: Dark surfaces appear recessed because the backdrop radiates an eerie teal luminescence (`#084259`).
+- Rim Lighting: Borders rendered in champagne gold `#d8c192` simulate physical foil edge gilding.
+
+## 7. Do&#39;s and Don&#39;ts
+
+### Do
+
+- Do use the dual gold tones (`#bc9b64` and `#C4A17E`) exclusively for names, main buttons, and arched structural outlines.
+- Do keep body text strictly legible in soft cream `#F8F4E7` or silver `#C6C6C6` against the deep midnight background.
+- Do preserve the architectural `220px 220px 0 0` top radius for event cards; it is the visual signature of the design.
+- Do maintain centered alignment across all ceremonial typography.
+
+### Don&#39;t
+
+- Don&#39;t use bright neon blues, stark primary greens, or flat pastel pinks.
+- Don&#39;t use heavy drop-shadows with sharp black offsets; keep shadows diffuse, radial, and velvety.
+- Don&#39;t use playful rounded fonts (like Comic Sans, Bubblegum, or Inter); maintain the solemn trio of `Carattere`, `Cardo`, and `Poppins`.
+- Don&#39;t stretch content wider than 640px on desktop; keep it in an elegant portrait card frame.
+
+## 8. Responsive Behavior
+
+### Breakpoints
+
+| Name | Width | Key Changes |
+| --- | --- | --- |
+| Mobile (Primary) | `&lt; 768px` | Full width padding (15px - 20px), couple names stack comfortably at 3.5rem - 4.0rem |
+| Tablet | `768px - 1024px` | Content bounded in 540px centered column; ornaments scale down |
+| Desktop | `&gt; 1024px` | Frame invitation as a centered smartphone mockup stage (`max-width: 480px`) with blurred atmospheric background |
+
+### Touch Targets
+
+- Minimum button hit area: `44px` height with full tap target padding.
+- Sticky audio toggle: `50px x 50px` floating circle in bottom corner with `12px` screen offset.
+
+### Collapsing Strategy
+
+- Single column flow by default. No multi-column table wraps needed.
+- Couple profiles stack vertically with romantic script separator `-&amp;-` positioned between bride and groom.
+
+## 9. Agent Prompt Guide
+
+### Quick Color Reference
+
+- Primary CTA: `linear-gradient(90deg, #bc9b64 0%, #86672B 100%)`
+- Background: `radial-gradient(at center center, #084259 0%, #0C0C0C 100%)`
+- Heading text: `#F8F4E7` (Cream) &amp; `#bc9b64` (Gold)
+- Body text: `#C6C6C6` (Silver) &amp; `#FFFFFF` (White)
+- Border or ring: `#C4A17E` &amp; `#d8c192`
+- Accent: `#bc9b64`
+
+### Quick Summary
+
+A midnight petrol and gilded champagne digital wedding invitation system. It combines cathedral arch containers, slow-rotating mandalas, dual-tone gold script typography (`Carattere`), formal Roman serifs (`Cardo`), and modern geometric details (`Poppins`) over a luminous radial dark teal background.
+
+### Example Component Prompts
+
+- Hero: &quot;Create a full-height centered invitation cover with a radial background from `#084259` to `#000000`. Include an uppercase eyebrow &#39;The Wedding Of&#39;, large dual-tone gold cursive names &#39;Bowo &amp; Maya&#39; in `Carattere`, a recipient badge for &#39;Lubabah&#39;, and a pill-shaped gold button &#39;Buka Undangan&#39;.&quot;
+- Card: &quot;Build an event schedule card with an arched top `border-radius: 220px 220px 0 0`, framed in a 2px `#C4A17E` gold border. Include an italic serif heading &#39;Akad&#39;, a laurel divider, a 3-part calendar badge with &#39;20&#39; in 55px serif on gold background, and an address in soft silver.&quot;
+- Navigation: &quot;Render a discreet floating circular music toggle button in the bottom right corner with a gold ring border and a rotating disc icon.&quot;
+
+### Ready-to-Use Prompt
+
+&quot;Build a luxury dark wedding invitation page inspired by Ringvitation using a midnight navy radial backdrop (`#084259` to `#000000`). Use Google Fonts &#39;Carattere&#39; for romantic script names in warm champagne gold (`#bc9b64`), &#39;Cardo&#39; for ceremonial section titles, and &#39;Poppins&#39; for clean cream text (`#F8F4E7`). Feature an arched cathedral card with `220px 220px 0 0` border radius for the wedding events, complete with a countdown timer, gold badge calendar date, and subtle floral rotations.&quot;
+
+### Iteration Guide
+
+1. Start by setting up the dark atmospheric radial background and importing `Carattere`, `Cardo`, and `Poppins` from Google Fonts.
+2. Build the opening guest gatekeeper with recipient name tag and gold pill button.
+3. Construct the cathedral arched card (`border-radius: 220px 220px 0 0`) for Akad and Reception details.
+4. Add the couple profile card with the `-&amp;-` separator and parent lineage in pale silver.
+
+## Optional Appendix: Interaction Patterns
+
+- Scroll behavior: Smooth sequential reveal with soft fade-in-up animations.
+- Hover behavior: Subtle button brightness increase and scale effect (1.02x).
+- Click behavior: Tapping &#39;Buka Undangan&#39; unlocks the document, initiates background instrumental music, and smooth-scrolls into the hero section.
+- Animation tone: Ceremonial, slow, and cinematic (`animated-slow`, 1.5s - 2s durations).
+
+## Optional Appendix: Observed Pages
+
+- `https://inv.ringvitation.my.id/bowo-maya/?untuk=Lubabah`: Sourced real elementor CSS rules, custom gradient radial backgrounds, typography families, arched card geometry, and guest token logic.
+</pre>
+              <article class="rendered-view" id="previewView" hidden><section><h2>1. Visual Theme &amp; Atmosphere</h2><p>An opulent, deeply atmospheric dark-romance digital wedding invitation tailored for intimate luxury and timeless solemnity. The aesthetic departs sharply from conventional airy pastels, adopting a moody nocturnal canvas dominated by deep petrol navy (<code>#084259</code>), abyssal graphite (<code>#000000</code>, <code>#0C0C0C</code>), and opulent warm champagne golds (<code>#bc9b64</code>, <code>#C4A17E</code>).</p><p>The composition marries modern architectural containers with sacred, classical romance. Slow ethereal rotations of celestial floral mandalas float in negative space, while delicate arched cathedral silhouettes (<code>border-radius: 220px 220px 0 0</code>) frame the matrimonial events. Typography balances ceremonial calligraphic flourishes (<code>Carattere</code>) with dignified literary serif typography (<code>Cardo</code>) and ultra-clean modern geometric utility labels (<code>Poppins</code>). The atmosphere conveys solemn sanctity, royal warmth, and bespoke celebratory grandeur.</p><ul><li>Overall feeling: Moody midnight romance, imperial elegance, liturgical serenity, and bespoke digital luxury.</li><li>Visual density: Measured and expansive; dramatic vertical breathing room accented by intimate nested cards.</li><li>Brand posture: Bespoke celebratory craftsmanship, culturally reverent, and sophisticated.</li><li>Signature motifs: Cathedral-arch containers, slowly rotating 360-degree floral mandalas, dual-tone gold script headings, and textured tribal tree dividers.</li></ul><h3>Key Characteristics</h3><ul><li>Midnight Petrol &amp; Gold Gradient: Atmospheric backdrop blending intense dark oceanic teal with deep noir.</li><li>Cathedral Arched Cards: Distinctive top-rounded arched event cards (<code>220px 220px 0 0</code>) with dual-pixel champagne borders.</li><li>Dual Script &amp; Serif Typography: Expressive <code>Carattere</code> cursive script for couple names, anchored by <code>Cardo</code> for solemn dates and titles.</li><li>Layered Entrance Choreography: Progressive reveal sequences using slow fade-ins, zoom-ins, and floating background florals.</li></ul></section><section><h2>2. Color Palette &amp; Roles</h2><table><thead><tr><th>Role</th><th>Semantic Name</th><th>Value</th><th>Usage</th></tr></thead><tbody><tr><td>Primary action</td><td>Royal Gold Gradient</td><td><code>linear-gradient(90deg, #bc9b64 0%, #86672B 100%)</code></td><td>Main CTA button (&quot;Buka Undangan&quot;), interactive buttons</td></tr><tr><td>Accent</td><td>Champagne Gold</td><td><code>#bc9b64</code></td><td>Bride/Groom calligraphic names, calendar highlighted badges</td></tr><tr><td>Secondary Accent</td><td>Warm Sand Gold</td><td><code>#C4A17E</code></td><td>Arched container borders, date highlight chips, decorative accents</td></tr><tr><td>Deep Atmosphere</td><td>Midnight Petrol</td><td><code>#084259</code></td><td>Central gradient glow, modal atmospheric radial centers</td></tr><tr><td>Surface</td><td>Noir Black</td><td><code>#0C0C0C</code></td><td>Nested container backgrounds, modal dialog surface</td></tr><tr><td>Surface Deep</td><td>Translucent Jet</td><td><code>rgba(0, 0, 0, 0.83)</code></td><td>Couple profile card backdrop with warm gold border</td></tr><tr><td>Text Primary</td><td>Cream Silk</td><td><code>#F8F4E7</code></td><td>Primary headings, subheadings, ceremony names, countdown numbers</td></tr><tr><td>Text Secondary</td><td>Pale Silver</td><td><code>#C6C6C6</code></td><td>Parent names, venue addresses, descriptive body copy</td></tr><tr><td>Text Muted</td><td>Ash Gray</td><td><code>#8D8C8C</code></td><td>Section eyebrows, divider text, decorative line labels</td></tr><tr><td>Border</td><td>Fine Champagne</td><td><code>#d8c192</code></td><td>Subtle profile container boundaries and decorative outlines</td></tr></tbody></table><h3>Primary</h3><ul><li>Royal Gold (<code>#bc9b64</code>): Expresses celebration and warmth, used on the groom&#39;s name and primary invitation trigger.</li><li>Warm Sand Gold (<code>#C4A17E</code>): Complements the primary gold on the bride&#39;s name, arch frames, and calendar blocks.</li></ul><h3>Interactive</h3><ul><li>Primary Button: Linear gradient <code>#bc9b64</code> to <code>#86672B</code> with soft drop shadow <code>1px 1px 6px rgba(0, 0, 0, 0.26)</code> and white text.</li><li>Secondary Button: Pale cream <code>#F8F4E7</code> fill with slate border <code>#656565</code> and sharp rectangular corners.</li><li>Icon Triggers: Enclosed envelope and navigation icons colored in warm cream <code>#F8F4E7</code>.</li></ul><h3>Neutral Scale</h3><ul><li>Cream Silk (<code>#F8F4E7</code>): Highest contrast text and numerical display.</li><li>Pure White (<code>#FFFFFF</code>): Button text, holy scripture verses, and secondary event subheaders.</li><li>Pale Silver (<code>#C6C6C6</code>): Secondary metadata, parental lineage, and event addresses.</li><li>Ash Gray (<code>#8D8C8C</code>): Subtle divider separators and formal uppercase headers.</li><li>Midnight Noir (<code>#000000</code> / <code>#0C0C0C</code>): Deepest background absorption layer.</li></ul><h3>Surface &amp; Overlay</h3><ul><li>Background Base: Radial gradient <code>radial-gradient(circle at center, #084259 0%, #0C0C0C 100%)</code>.</li><li>Card Surface: Semi-opaque black <code>#000000D4</code> (<code>rgba(0, 0, 0, 0.83)</code>) providing clear readability over background animations.</li><li>Modal Cover Overlay: Full-screen locked takeover overlay in dark petrol gradient with radial bloom.</li></ul><h3>Theme Modes</h3><p>#### Dark Mode (Native &amp; Primary)</p><ul><li>Background: Radial gradient <code>#084259</code> to <code>#000000</code> / <code>#151414</code>.</li><li>Surface: <code>#0C1F28</code> / <code>#000000D4</code> with <code>#d8c192</code> border.</li><li>Text: <code>#F8F4E7</code> (Cream) and <code>#C6C6C6</code> (Silver).</li><li>Accent: <code>#bc9b64</code> &amp; <code>#C4A17E</code> (Gold dual-tone).</li><li>Notes: This design system is natively designed for an immersive dark luxury experience.</li></ul><p>#### Light Mode (Secondary / Card Contrast Variant)</p><ul><li>Background: Pale cream <code>#f5f5f5</code> to <code>#f2f5f7</code>.</li><li>Surface: <code>#ffffff</code> with subtle gray shadow <code>0 10px 30px rgba(0,0,0,0.05)</code>.</li><li>Text: <code>#3a3a3a</code> / <code>#4b4f58</code>.</li><li>Accent: <code>#0170b9</code> (Astra default fallback) or <code>#bc9b64</code> (Theme accent).</li><li>Notes: Used when embedded in neutral article or blog wrappers.</li></ul><h3>Shadows &amp; Depth</h3><ul><li>Elevation Card: <code>box-shadow: 0px 0px 21px 0px rgba(0, 0, 0, 0.3)</code> on couple profile cards.</li><li>Cathedral Arch Glow: <code>box-shadow: 0px 0px 13px 0px rgba(0, 0, 0, 0.24)</code>.</li><li>Section Separation: Heavy drop shadow <code>0px 0px 28px 0px rgba(0, 0, 0, 0.51)</code> on full-width transition blocks.</li><li>Text Shadow: Subtle depth <code>1px 1px 1px rgba(0, 0, 0, 0.3)</code> on display cursive script.</li></ul></section><section><h2>3. Typography Rules</h2><h3>Font Family</h3><ul><li>Primary Script: <code>&quot;Carattere&quot;, cursive</code> (Google Fonts) – ceremonial calligraphy for names &amp; &quot;&amp;&quot; connector.</li><li>Editorial Serif: <code>&quot;Cardo&quot;, serif</code> (Google Fonts) – formal event titles, dates, and liturgical markers.</li><li>Modern Sans: <code>&quot;Poppins&quot;, sans-serif</code> (Google Fonts) – clean geometric utility, labels, and verses.</li><li>Secondary Sans: <code>&quot;Roboto&quot;, sans-serif</code> – system fallbacks and input elements.</li><li>Monospace: <code>&quot;Roboto Mono&quot;, monospace</code> – technical fallbacks.</li></ul><h3>Hierarchy</h3><table><thead><tr><th>Role</th><th>Font</th><th>Size</th><th>Weight</th><th>Line Height</th><th>Letter Spacing</th><th>Notes</th></tr></thead><tbody><tr><td>Hero Couple Names</td><td>Carattere</td><td>4.0em - 5.0rem</td><td>500</td><td>1.1</td><td>0.02em</td><td>Gold <code>#bc9b64</code> &amp; <code>#C4A17E</code> with text shadow</td></tr><tr><td>Couple Connector (&quot;&amp;&quot;)</td><td>Carattere</td><td>5.0rem</td><td>400</td><td>1.0</td><td>normal</td><td>Pale gray <code>#A8A8A8</code> or <code>#DADADA</code></td></tr><tr><td>Section Headline</td><td>Cardo</td><td>2.5rem - 3.0rem</td><td>400</td><td>1.2</td><td>0.05em</td><td>Italic styling for &quot;Akad&quot;, &quot;Resepsi&quot;, and &quot;Event&quot;</td></tr><tr><td>Date Mega Number</td><td>Cardo</td><td>55px</td><td>600</td><td>1.0</td><td>normal</td><td>Displayed on gold badge box <code>#C4A17E</code></td></tr><tr><td>Section Eyebrow</td><td>Poppins</td><td>0.8rem - 1.0rem</td><td>400</td><td>1.4</td><td>0.2em</td><td>Uppercase, cream <code>#F8F4E7</code> (&quot;SAVE THE DATE&quot;, &quot;THE WEDDING OF&quot;)</td></tr><tr><td>Body / Verses</td><td>Poppins</td><td>16px</td><td>400</td><td>1.7</td><td>normal</td><td>Italicized scripture quotes, white <code>#FFFFFF</code></td></tr><tr><td>Metadata / Lineage</td><td>Poppins</td><td>14px</td><td>400</td><td>1.6</td><td>normal</td><td>Parental details and locations in silver <code>#C6C6C6</code></td></tr><tr><td>Countdown Numbers</td><td>Poppins</td><td>2.0rem</td><td>400</td><td>1.0</td><td>normal</td><td>Framed in hollow bordered countdown units</td></tr></tbody></table><h3>Principles</h3><ul><li>Dignified Contrast: Pair emotive hand-lettered script (<code>Carattere</code>) with strict, symmetrical Roman serif capitals (<code>Cardo</code>).</li><li>Breathing Room: Large display sizes offset by generous margin blocks preventing visual crowding.</li><li>Golden Ratio Accentuation: Primary human names receive warm reflective metallic tones; procedural titles remain neutral cream.</li></ul></section><section><h2>4. Component Stylings</h2><h3>Buttons and Links</h3><ul><li>Primary CTA (&quot;Buka Undangan&quot;):</li><li>Height: <code>44px</code> - <code>48px</code>, padding <code>10px 28px</code>.</li><li>Background: Gradient <code>linear-gradient(90deg, #bc9b64 0%, #86672B 100%)</code>.</li><li>Border: None; border-radius: <code>30px</code> (pill).</li><li>Text: White <code>#FFFFFF</code>, <code>Poppins</code> 14px, medium weight (<code>500</code>).</li><li>Leading Icon: FontAwesome envelope icon (<code>far fa-envelope</code>).</li><li>Secondary Action (&quot;Lokasi Acara&quot;, &quot;Kirim Ucapan&quot;):</li><li>Height: <code>38px</code>, padding <code>8px 20px</code>.</li><li>Background: Cream <code>#F8F4E7</code>, border <code>1px solid #656565</code>.</li><li>Border Radius: Sharp <code>0px</code> or subtle micro <code>4px</code>.</li><li>Text: Dark slate <code>#656565</code>, font weight <code>600</code>.</li></ul><h3>Cards and Containers</h3><ul><li>Cathedral Arched Container (Ceremony &amp; Reception Cards):</li><li>Border Radius: <code>220px 220px 0px 0px</code> (architectural arched top).</li><li>Border: <code>2px solid #C4A17E</code>.</li><li>Background: Radial gradient <code>#084259 0%</code> to <code>#030303 100%</code>.</li><li>Padding: <code>70px 20px 50px 20px</code>.</li><li>Elevation: Soft shadow <code>0px 0px 13px 0px rgba(0, 0, 0, 0.24)</code>.</li><li>Profile Couple Container:</li><li>Border: <code>2px solid #d8c192</code>.</li><li>Border Radius: <code>2px</code> (nearly rectangular sharp frame).</li><li>Background: <code>rgba(0, 0, 0, 0.83)</code>.</li><li>Padding: <code>40px 20px</code>.</li><li>Holy Verse Block:</li><li>Border: None.</li><li>Background: Radial gradient <code>#084259 41%</code> to <code>#000000 140%</code>.</li><li>Shadow: Floating depth <code>0px 0px 28px 0px rgba(0, 0, 0, 0.51)</code>.</li></ul><h3>Inputs and Interactive Controls</h3><ul><li>Guest Name Gatekeeper:</li><li>Input auto-fill via query parameter (<code>?untuk=NamaTamu</code>).</li><li>Dynamic display inside guest badge: <code>&quot;Kepada Yth. Bapak/Ibu/Saudara/i [Nama]&quot;</code>.</li><li>Countdown Widget:</li><li>4 inline modules (Days, Hours, Minutes, Seconds).</li><li>Border: <code>1px solid #F8F4E7</code>.</li><li>Background: Transparent with rounded borders.</li><li>Number: 2rem <code>Poppins</code>, Label: 0.7rem uppercase <code>Poppins</code>.</li></ul><h3>Navigation</h3><ul><li>Floating Action Widget:</li><li>Floating circular audio toggle button at the bottom/side corner.</li><li>Auto-plays romantic instrumental soundtrack upon tapping &quot;Buka Undangan&quot;.</li><li>Iconography: Music disk animation or volume wave icon.</li></ul><h3>Image Treatment</h3><ul><li>Rotating Mandala Ornament:</li><li>PNG floral ring (<code>hjjhu78hjh-1-1.png</code>) positioned absolutely at corners and edges.</li><li>CSS Animation: Continuous rotation <code>rotate-360 animated-slow</code> (360 degrees infinitely).</li><li>Couple Portraits:</li><li>Dimensions: Approx <code>320px</code> width.</li><li>Asymmetric Box Shadow: Groom portrait uses <code>20px 20px 0px 0px rgba(212, 212, 212, 0.19)</code>; Bride portrait uses <code>-20px 20px 0px 0px rgba(212, 212, 212, 0.19)</code>.</li><li>Border Radius: <code>0px</code> (crisp editorial photograph crops).</li></ul><h3>Distinctive Components</h3><ul><li>Tribal Tree / Decorative Divider:</li><li>Centered SVG patterned flourish with embedded organic curves or laurel leaf dividers (<code>--divider-pattern-url</code>).</li><li>Color: Cream <code>#FFFFFF</code> or Ash <code>#8D8C8C</code>, width <code>50%</code>.</li><li>Calendar Badge Block:</li><li>Triple stack container: Month (top bordered), Day (solid gold filled square with large 55px number), Year (bottom bordered).</li></ul></section><section><h2>5. Layout Principles</h2><h3>Spacing System</h3><ul><li>Base unit: <code>8px</code>.</li><li>Repeated spacing values: <code>8px</code>, <code>16px</code>, <code>24px</code>, <code>32px</code>, <code>48px</code>, <code>70px</code>.</li></ul><h3>Grid &amp; Container</h3><ul><li>Grid logic: Single-column centered stream optimized for vertical mobile scrolling.</li><li>Max content width: <code>100%</code> on mobile, constrained to <code>480px</code> - <code>600px</code> on desktop viewport to preserve intimate phone-invitation ratio.</li><li>Section spacing: <code>40px</code> to <code>70px</code> vertical padding between matrimonial chapters.</li></ul><h3>Whitespace Philosophy</h3><ul><li>Concentric Density: High breathing room around royal headings; compact, deliberate density inside the cathedral event arch.</li><li>Center-aligned balance: Strict central axis alignment across all textual and ornamental elements.</li></ul><h3>Border Radius Scale</h3><ul><li>Micro: <code>2px</code> (profile photo boxes, formal borders).</li><li>Standard: <code>8px</code> - <code>12px</code> (inputs and secondary containers).</li><li>Arched: <code>220px 220px 0px 0px</code> (signature ceremony arch cards).</li><li>Pill: <code>999px</code> (opening CTA button).</li></ul></section><section><h2>6. Depth &amp; Elevation</h2><table><thead><tr><th>Level</th><th>Treatment</th><th>Use</th></tr></thead><tbody><tr><td>Flat</td><td><code>background: transparent; border: none;</code></td><td>Headline titles, floating couple names</td></tr><tr><td>Soft Glow</td><td><code>radial-gradient(circle at center, #084259 40%, transparent 80%)</code></td><td>Atmospheric backdrop glow</td></tr><tr><td>Raised Card</td><td><code>background: #000000D4; box-shadow: 0px 0px 21px rgba(0,0,0,0.3); border: 2px solid #d8c192;</code></td><td>Couple biographical cards</td></tr><tr><td>Arch Elevated</td><td><code>box-shadow: 0px 0px 13px rgba(0,0,0,0.24); border: 2px solid #C4A17E;</code></td><td>Ceremony &amp; Reception arch cards</td></tr><tr><td>Overlay Gate</td><td><code>position: fixed; inset: 0; z-index: 9999; backdrop-filter: blur(8px);</code></td><td>Opening gate modal before invitation unlock</td></tr></tbody></table><h3>Depth Principles</h3><ul><li>Light-Emitting Backgrounds: Dark surfaces appear recessed because the backdrop radiates an eerie teal luminescence (<code>#084259</code>).</li><li>Rim Lighting: Borders rendered in champagne gold <code>#d8c192</code> simulate physical foil edge gilding.</li></ul></section><section><h2>7. Do&#39;s and Don&#39;ts</h2><h3>Do</h3><ul><li>Do use the dual gold tones (<code>#bc9b64</code> and <code>#C4A17E</code>) exclusively for names, main buttons, and arched structural outlines.</li><li>Do keep body text strictly legible in soft cream <code>#F8F4E7</code> or silver <code>#C6C6C6</code> against the deep midnight background.</li><li>Do preserve the architectural <code>220px 220px 0 0</code> top radius for event cards; it is the visual signature of the design.</li><li>Do maintain centered alignment across all ceremonial typography.</li></ul><h3>Don&#39;t</h3><ul><li>Don&#39;t use bright neon blues, stark primary greens, or flat pastel pinks.</li><li>Don&#39;t use heavy drop-shadows with sharp black offsets; keep shadows diffuse, radial, and velvety.</li><li>Don&#39;t use playful rounded fonts (like Comic Sans, Bubblegum, or Inter); maintain the solemn trio of <code>Carattere</code>, <code>Cardo</code>, and <code>Poppins</code>.</li><li>Don&#39;t stretch content wider than 640px on desktop; keep it in an elegant portrait card frame.</li></ul></section><section><h2>8. Responsive Behavior</h2><h3>Breakpoints</h3><table><thead><tr><th>Name</th><th>Width</th><th>Key Changes</th></tr></thead><tbody><tr><td>Mobile (Primary)</td><td><code>&lt; 768px</code></td><td>Full width padding (15px - 20px), couple names stack comfortably at 3.5rem - 4.0rem</td></tr><tr><td>Tablet</td><td><code>768px - 1024px</code></td><td>Content bounded in 540px centered column; ornaments scale down</td></tr><tr><td>Desktop</td><td><code>&gt; 1024px</code></td><td>Frame invitation as a centered smartphone mockup stage (<code>max-width: 480px</code>) with blurred atmospheric background</td></tr></tbody></table><h3>Touch Targets</h3><ul><li>Minimum button hit area: <code>44px</code> height with full tap target padding.</li><li>Sticky audio toggle: <code>50px x 50px</code> floating circle in bottom corner with <code>12px</code> screen offset.</li></ul><h3>Collapsing Strategy</h3><ul><li>Single column flow by default. No multi-column table wraps needed.</li><li>Couple profiles stack vertically with romantic script separator <code>-&amp;-</code> positioned between bride and groom.</li></ul></section><section><h2>9. Agent Prompt Guide</h2><h3>Quick Color Reference</h3><ul><li>Primary CTA: <code>linear-gradient(90deg, #bc9b64 0%, #86672B 100%)</code></li><li>Background: <code>radial-gradient(at center center, #084259 0%, #0C0C0C 100%)</code></li><li>Heading text: <code>#F8F4E7</code> (Cream) &amp; <code>#bc9b64</code> (Gold)</li><li>Body text: <code>#C6C6C6</code> (Silver) &amp; <code>#FFFFFF</code> (White)</li><li>Border or ring: <code>#C4A17E</code> &amp; <code>#d8c192</code></li><li>Accent: <code>#bc9b64</code></li></ul><h3>Quick Summary</h3><p>A midnight petrol and gilded champagne digital wedding invitation system. It combines cathedral arch containers, slow-rotating mandalas, dual-tone gold script typography (<code>Carattere</code>), formal Roman serifs (<code>Cardo</code>), and modern geometric details (<code>Poppins</code>) over a luminous radial dark teal background.</p><h3>Example Component Prompts</h3><ul><li>Hero: &quot;Create a full-height centered invitation cover with a radial background from <code>#084259</code> to <code>#000000</code>. Include an uppercase eyebrow &#39;The Wedding Of&#39;, large dual-tone gold cursive names &#39;Bowo &amp; Maya&#39; in <code>Carattere</code>, a recipient badge for &#39;Lubabah&#39;, and a pill-shaped gold button &#39;Buka Undangan&#39;.&quot;</li><li>Card: &quot;Build an event schedule card with an arched top <code>border-radius: 220px 220px 0 0</code>, framed in a 2px <code>#C4A17E</code> gold border. Include an italic serif heading &#39;Akad&#39;, a laurel divider, a 3-part calendar badge with &#39;20&#39; in 55px serif on gold background, and an address in soft silver.&quot;</li><li>Navigation: &quot;Render a discreet floating circular music toggle button in the bottom right corner with a gold ring border and a rotating disc icon.&quot;</li></ul><h3>Ready-to-Use Prompt</h3><p>&quot;Build a luxury dark wedding invitation page inspired by Ringvitation using a midnight navy radial backdrop (<code>#084259</code> to <code>#000000</code>). Use Google Fonts &#39;Carattere&#39; for romantic script names in warm champagne gold (<code>#bc9b64</code>), &#39;Cardo&#39; for ceremonial section titles, and &#39;Poppins&#39; for clean cream text (<code>#F8F4E7</code>). Feature an arched cathedral card with <code>220px 220px 0 0</code> border radius for the wedding events, complete with a countdown timer, gold badge calendar date, and subtle floral rotations.&quot;</p><h3>Iteration Guide</h3><ol><li>Start by setting up the dark atmospheric radial background and importing <code>Carattere</code>, <code>Cardo</code>, and <code>Poppins</code> from Google Fonts.</li><li>Build the opening guest gatekeeper with recipient name tag and gold pill button.</li><li>Construct the cathedral arched card (<code>border-radius: 220px 220px 0 0</code>) for Akad and Reception details.</li><li>Add the couple profile card with the <code>-&amp;-</code> separator and parent lineage in pale silver.</li></ol></section><section><h2>Optional Appendix: Interaction Patterns</h2><ul><li>Scroll behavior: Smooth sequential reveal with soft fade-in-up animations.</li><li>Hover behavior: Subtle button brightness increase and scale effect (1.02x).</li><li>Click behavior: Tapping &#39;Buka Undangan&#39; unlocks the document, initiates background instrumental music, and smooth-scrolls into the hero section.</li><li>Animation tone: Ceremonial, slow, and cinematic (<code>animated-slow</code>, 1.5s - 2s durations).</li></ul></section><section><h2>Optional Appendix: Observed Pages</h2><ul><li><code>https://inv.ringvitation.my.id/bowo-maya/?untuk=Lubabah</code>: Sourced real elementor CSS rules, custom gradient radial backgrounds, typography families, arched card geometry, and guest token logic.</li></ul></section></article>
+            </div>
+          </article>
+        </section>
+      </div>
+    </main>
+
+    <script>
+      const sourceView = document.getElementById("sourceView");
+      const previewView = document.getElementById("previewView");
+      const copyButton = document.getElementById("copyButton");
+      const copyState = document.getElementById("copyState");
+      const viewButtons = document.querySelectorAll("[data-view]");
+
+      function setActiveView(view) {
+        const showSource = view === "source";
+        sourceView.hidden = !showSource;
+        previewView.hidden = showSource;
+        viewButtons.forEach((button) => {
+          button.classList.toggle("is-active", button.dataset.view === view);
+        });
+      }
+
+      viewButtons.forEach((button) => {
+        button.addEventListener("click", () => setActiveView(button.dataset.view));
+      });
+
+      copyButton.addEventListener("click", async () => {
+        try {
+          await navigator.clipboard.writeText(sourceView.textContent || "");
+          copyState.textContent = "Copied";
+        } catch (error) {
+          copyState.textContent = "Clipboard unavailable";
+        }
+
+        setTimeout(() => {
+          copyState.textContent = "";
+        }, 1400);
+      });
+    </script>
+  </body>
 </html>
